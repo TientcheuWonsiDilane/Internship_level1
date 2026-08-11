@@ -40,33 +40,49 @@ app.get("/tasks", (req, res) => {
 app.post("/tasks/create", (req, res) => {
   const { title, description } = req.body;
   try {
-    if (tasks.some(task => task.title==title)) {
-        return res.status(400).json({message: "task already exists"});
+    if (tasks.some((task) => task.title == title)) {
+      return res.status(400).json({ message: "task already exists" });
     }
-    const newTask = {id: Date.now(), title: title, description: description}
+    const newTask = { id: Date.now(), title: title, description: description };
     tasks.push(newTask);
     res.status(201).json(newTask);
-
   } catch (error) {
     console.log(error);
-    return res.status(500).json({message: "Internal server error"});
+    return res.status(500).json({ message: "Internal server error" });
   }
 });
 
-app.delete("/tasks/delete/:title", (req, res)=>{
-    const {title} = req.params;
-    try{
-        const exist = tasks.some(task => task.title == title);
-        if(!exist){
-            return res.status(404).json({message: "Task not found"});
-        }
-
-        tasks = tasks.filter(task => task.title !== title);
-        return res.status(200).json({message: `Task "${title}" deleted successfully`});
-    } catch(error){
-        console.log(error);
-        return res.status(500).json({message: "Internal server error"});
+app.delete("/tasks/delete/:title", (req, res) => {
+  const { title } = req.params;
+  try {
+    const exist = tasks.some((task) => task.title == title);
+    if (!exist) {
+      return res.status(404).json({ message: "Task not found" });
     }
+
+    tasks = tasks.filter((task) => task.title !== title);
+    return res
+      .status(200)
+      .json({ message: `Task "${title}" deleted successfully` });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+app.put("/tasks/update/:title", (req, res) => {
+  const { title } = req.params;
+  const { updateTitle, updateDescription } = req.body;
+  try {
+    const index = tasks.findIndex((task) => (task.title === title));
+    
+    tasks[index] = {...tasks[index], title: updateTitle, description: updateDescription}
+    
+    return res.status(200).json(updateTask);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
 });
 
 app.listen(4000, () => {

@@ -1,29 +1,51 @@
 import express from "express";
+import cors from  "cors";
 
 const app = express();
+app.use(cors());
 
 app.use(express.json());
 
 let tasks = [
   {
-    id: 0,
-    title: "home page",
-    description:
-      "design and implement a great and modern landing page with modern tools and advanced techniques.",
+    "id": "04850",
+    "title": "Fix Webhook Auto-delete Bug",
+    "status": "todo",
+    "priority": "🔴 High",
+    "startTime": "8:00 am",
+    "endTime": "4:00 pm",
+    "repository": "matrix-core",
+    "assignee": "Alex",
+    "completedSteps": 2,
+    "totalSteps": 3,
+    "actionText": "Clock In"
   },
   {
-    id: 1,
-    title: "signup",
-    description:
-      "design and implement a great and modern landing page with modern tools and advanced techniques.",
+    "id": "04851",
+    "title": "Members Page Integration",
+    "status": "in_progress",
+    "priority": "⚡ Active",
+    "startTime": "9:00 am",
+    "endTime": "5:00 pm",
+    "repository": "matrix-ui",
+    "assignee": "Sam",
+    "completedSteps": 1,
+    "totalSteps": 2,
+    "actionText": "Clock In"
   },
   {
-    id: 2,
-    title: "login",
-    description:
-      "design and implement a great and modern landing page with modern tools and advanced techniques.",
-  },
-];
+    "id": "04849",
+    "title": "Initial Titan Setup",
+    "status": "done",
+    "priority": "✓ Done",
+    "completedDate": "Yesterday",
+    "repository": "matrix-core",
+    "assignee": "Alex",
+    "completedSteps": 3,
+    "totalSteps": 3,
+    "actionText": "Closed"
+  }
+]
 
 app.get("/tasks", (req, res) => {
   try {

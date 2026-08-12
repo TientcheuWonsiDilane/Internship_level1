@@ -371,7 +371,7 @@
         </header>
 
         <section class="kanban-container">
-          <div class="kanban-column">
+          <div class="kanban-column" data-status="todo">
             <div class="column-header">
               <span>To Do</span>
               <span class="column-count">2</span>
@@ -420,7 +420,7 @@
             </div>
           </div>
 
-          <div class="kanban-column">
+          <div class="kanban-column" data-status="in_progress">
             <div class="column-header">
               <span>In Progress</span>
               <span class="column-count">1</span>
@@ -469,7 +469,7 @@
             </div>
           </div>
 
-          <div class="kanban-column">
+          <div class="kanban-column" data-status="done">
             <div class="column-header">
               <span>Done</span>
               <span class="column-count">1</span>
@@ -520,6 +520,7 @@
         </section>
       </main>
     </div>
+    <script src="script.js"></script>
     <script>
       const container = document.querySelector(".sidebar");
       let isScrolling;
